@@ -1,0 +1,7 @@
+.employee {
+  display: flex;
+}
+.employee__avatar {
+  width: 100px;
+  margin-right: 10px;
+}

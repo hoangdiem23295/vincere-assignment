@@ -1,29 +1,37 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getEmployeeList } from '../redux/actions/employeeList'
+import { getEmployeeList, resetEmployeeList } from '../redux/actions/employeeList'
 import Employee from './Employee'
 import { Grid } from '@material-ui/core'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
+import Page from '../common/Page'
 
 const Employees = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const location = useLocation()
   const employees = useSelector(state => state.employeeList.data)
   const loading = useSelector(state => state.employeeList.loading)
   const error = useSelector(state => state.employeeList.error)
-  
+  const pathName = location.pathname === '' || location.pathname === '/'
+
   useEffect(() => {
     dispatch(getEmployeeList())
   }, [dispatch, history])
-  const employeeList = !loading && employees.length > 0 ? employees.map(employee => {
-    return <Grid item xs={6} key={employee.id}><Employee employee={employee}></Employee></Grid>
-  }) : <p>No users available</p>
+  useEffect(() => {
+    return () => {
+      dispatch(resetEmployeeList())
+    };
+  }, [])
+ 
   return (
-    <div>{
-      loading ? <p>Loading...</p> : error ? <p>{error}</p> : <Grid container spacing={3}>
-        {employeeList}
-      </Grid>
-    }</div>
+    <Page title={pathName && 'Employee List'}>
+      <p>{loading && employees.length===0 && 'Loading...'}</p>
+      <Grid container spacing={3}>{(!loading && employees && employees.length > 0) && employees.map(employee => {
+        return <Grid item xs={6} key={employee.id}><Employee employee={employee}></Employee></Grid>
+      })}</Grid>
+      <p>{(!loading && employees && employees.length === 0) && 'No employee in list'}</p>
+    </Page>
   )
 }
 

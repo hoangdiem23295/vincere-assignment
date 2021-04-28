@@ -12,27 +12,25 @@ const Employee = (props) => {
   }
 
   return (
-    <div>
-      <Card onClick={redirectDetailPage}>
-        <CardContent className="employee">
-          <div className="employee__avatar">
-            <Avatar variant="square" src={employee.avatar} style={{ height: '100px', width: '100px' }}></Avatar>
-          </div>
-          <div className="employee__content">
-            <Typography className="employee__title">
-              <b>ID: </b>{employee.id}</Typography>
-            <Typography><b>Name: </b>{employee.name}</Typography>
-            <Typography><b>Position: </b>{employee.position}</Typography>
-            <Typography>
-              <b>Created Date: </b>
-              <Moment format="YYYY/MM/DD hh:mm">
-                {employee.createAt}
-              </Moment>
-            </Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+    <Card onClick={redirectDetailPage} className="employee">
+      <CardContent className="employee__wrapper">
+        <div className="employee__avatar">
+          <Avatar variant="square" src={employee.avatar} style={{ height: '100px', width: '100px' }}></Avatar>
+        </div>
+        <div className="employee__content">
+          <Typography className="employee__title">
+            <b>ID: </b>{employee.id}</Typography>
+          <Typography><b>Name: </b>{employee.name}</Typography>
+          <Typography><b>Position: </b>{employee.position}</Typography>
+          <Typography>
+            <b>Created Date: </b>
+            <Moment format="YYYY/MM/DD hh:mm">
+              {employee.createAt}
+            </Moment>
+          </Typography>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

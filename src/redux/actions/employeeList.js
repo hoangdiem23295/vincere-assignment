@@ -6,3 +6,10 @@ export function getEmployeeList(employeeList) {
     payload: employeeList
   }
 }
+
+export function resetEmployeeList(employeeList) {
+  return {
+    type: type.RESET_EMPLOYEELIST_REQUESTED,
+    payload: employeeList
+  }
+}

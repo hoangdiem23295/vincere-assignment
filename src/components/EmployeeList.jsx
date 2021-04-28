@@ -21,7 +21,7 @@ const Employees = () => {
     return () => {
       dispatch(resetEmployeeList())
     };
-  })
+  }, [])
  
   return (
     <Page title={pathName && 'Employee List'}>

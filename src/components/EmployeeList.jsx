@@ -12,7 +12,6 @@ const Employees = () => {
   const location = useLocation()
   const employees = useSelector(state => state.employeeList.data)
   const loading = useSelector(state => state.employeeList.loading)
-  const error = useSelector(state => state.employeeList.error)
   const pathName = location.pathname === '' || location.pathname === '/'
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const Employees = () => {
     return () => {
       dispatch(resetEmployeeList())
     };
-  }, [])
+  })
  
   return (
     <Page title={pathName && 'Employee List'}>
